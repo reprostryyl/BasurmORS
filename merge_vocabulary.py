@@ -13,7 +13,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     LOAD_PATH = args.load_path
-    SAVE_DIR = args.save_dir
     VOC_PATH = args.voc_path
     
     # Load pre-trained llama tokenizer and sentencepiece model
@@ -42,8 +41,6 @@ if __name__ == '__main__':
         f.write(llama_spm.SerializeToString())
     with open(SAVE_VOCAB_PATH, 'w')  as f:
         f.writelines([f'{token.piece} {token.score}\n' for token in llama_spm.pieces])
-    tokenizer = LlamaTokenizer(SAVE_MODEL_PATH)
-    tokenizer.save_pretrained(SAVE_DIR)
     print(f'New llama tokenizer and spm has been saved to {SAVE_DIR}')
 
     # test
